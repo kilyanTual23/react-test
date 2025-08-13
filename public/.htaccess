@@ -1,6 +1,13 @@
 Options -MultiViews
+DirectoryIndex index.html
 RewriteEngine On
-RewriteBase /react-test/
+
+# Réécriture interne : sert le contenu de /react-test/ sans changer l'URL
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /react-test/index.html [L]
+RewriteRule ^(.*)$ /react-test/$1 [L]
+
+# Gestion SPA : si aucun fichier trouvé, renvoyer index.html du sous-dossier
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ /react-test/index.html [L]
