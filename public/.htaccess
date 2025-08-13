@@ -1,13 +1,16 @@
+# public_html/.htaccess
+
 Options -MultiViews
 DirectoryIndex index.html
 RewriteEngine On
 
-# Réécriture interne : sert le contenu de /react-test/ sans changer l'URL
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ /react-test/$1 [L]
+# 1) Sous-domaine react-test.kilyantual.com -> redirection 301 vers /react-test/
+RewriteCond %{HTTP_HOST} ^react-test\.kilyantual\.com$ [NC]
+RewriteRule ^(.*)$ https://kilyantual.com/react-test/$1 [L,R=301]
 
-# Gestion SPA : si aucun fichier trouvé, renvoyer index.html du sous-dossier
+# 2) SPA dans /react-test/ : toutes les routes renvoient le index.html du sous-dossier
+RewriteBase /
+RewriteCond %{REQUEST_URI} ^/react-test/ [NC]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ /react-test/index.html [L]
+RewriteRule ^react-test/.*$ /react-test/index.html [L]
