@@ -1,13 +1,24 @@
+# --- Base ---
 Options -MultiViews
 DirectoryIndex index.html
 RewriteEngine On
+RewriteBase /
 
-# 1) Proxy interne : react-test.kilyantual.com -> contenu de /react-test/
+# --- 1) Sous-domaine react-test.kilyantual.com -> mappé en interne sur /react-test/ ---
+# (ne réécrit PAS si l'URI pointe déjà sur /react-test/ pour éviter une boucle)
 RewriteCond %{HTTP_HOST} ^react-test\.kilyantual\.com$ [NC]
+RewriteCond %{REQUEST_URI} !^/react-test/ [NC]
 RewriteRule ^(.*)$ /react-test/$1 [L]
 
-# 2) SPA dans /react-test/ : toutes les routes renvoient le index.html
+# --- 2) SPA pour le sous-domaine : toutes les routes -> /react-test/index.html ---
 RewriteCond %{HTTP_HOST} ^react-test\.kilyantual\.com$ [NC]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^.*$ /react-test/index.html [L]
+RewriteRule ^ /react-test/index.html [L]
+
+# --- 3) (optionnel) SPA si on visite directement kilyantual.com/react-test/... ---
+RewriteCond %{HTTP_HOST} ^(www\.)?kilyantual\.com$ [NC]
+RewriteCond %{REQUEST_URI} ^/react-test/ [NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ /react-test/index.html [L]
