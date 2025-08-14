@@ -110,7 +110,7 @@ export default function LandingWine() {
               <Card className="w-full max-w-md rounded-2xl border-rose-100/80 bg-white/90 backdrop-blur">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2"><Package className="h-5 w-5"/> What you get monthly</CardTitle>
-                  <CardDescription>High‑end gear + hands‑on coaching.</CardDescription>
+                  <CardDescription>High‑end gear + hands on coaching.</CardDescription>
                 </CardHeader>
                 <CardContent className="grid gap-3 text-sm">
                   <div className="flex items-start gap-3"><Thermometer className="mt-0.5 h-4 w-4"/><p>Temperature‑controlled stainless fermenter (30L) with digital probe</p></div>
