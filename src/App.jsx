@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Check, Sparkles, Star, ShieldCheck, Leaf, Package, FlaskConical, Waves, CalendarClock, MapPin, LineChart, PhoneCall, Mail, CircleDollarSign, Clock3, Thermometer, Grape } from "lucide-react";
