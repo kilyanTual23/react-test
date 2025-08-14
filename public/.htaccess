@@ -1,12 +1,7 @@
-# public_html/react-test/.htaccess
 Options -MultiViews
 DirectoryIndex index.html
 RewriteEngine On
-
-# 1) Ne pas toucher aux fichiers/dossiers réels
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^ - [L]
-
-# 2) Fallback SPA : toute autre route -> index.html
-RewriteRule ^ index.html [L]
+RewriteBase /react-test/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /react-test/index.html [L]

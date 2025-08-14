@@ -5,6 +5,7 @@ import { defineConfig } from "vite"
 
 // https://vite.dev/config/
 export default defineConfig({
+   base: '/react-test/', // IMPORTANT pour un déploiement dans /react-test/
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
