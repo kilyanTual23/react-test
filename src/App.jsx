@@ -1,54 +1,31 @@
 import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Check, Sparkles, Star, ShieldCheck, Leaf, Package, FlaskConical, Waves, CalendarClock, MapPin, LineChart, PhoneCall, Mail, Thermometer, Grape } from "lucide-react";
+import { Check, Sparkles, Star, ShieldCheck, Leaf, Package, FlaskConical, Waves, CalendarClock, MapPin, LineChart, PhoneCall, Mail, CircleDollarSign, Clock3, Thermometer, Grape } from "lucide-react";
 import { Button } from "./components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./components/ui/card";
 import { Badge } from "./components/ui/badge";
 import { Input } from "./components/ui/input";
 import { Textarea } from "./components/ui/textarea";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "./components/ui/dialog";
-import { Tabs, TabsList, TabsTrigger } from "./components/ui/tabs";
-
-React;
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 
 // --- Helper components ---
-// --- Types compacts
-type Children = { children?: React.ReactNode };
-
-// Si tu as un <Section ...>{children}</Section>
-type SectionProps = Children & {
-  id?: string;
-  className?: string;
-} & React.HTMLAttributes<HTMLElement>;
-
-// Si tu as un <Stat label=... value=... sub=... />
-type StatProps = {
-  label?: React.ReactNode;   // accept texte OU JSX
-  value: React.ReactNode;    // <-- avant c'était string → ERREUR
-  sub?: React.ReactNode;
-  className?: string;
-};
-
-// --- Composants compacts
-
-// <Bullet>• du contenu</Bullet>
-const Bullet = ({ children }: Children) => <li>{children}</li>;
-
-// <Section id="..." className="...">{...}</Section>
-const Section = ({ id, className = "", children, ...rest }: SectionProps) => (
-  <section id={id} className={`mx-auto w-full max-w-7xl px-6 md:px-10 ${className}`} {...rest}>
-    {children}
-  </section>
+const Section = ({ id, className = "", children }) => (
+  <section id={id} className={`mx-auto w-full max-w-7xl px-6 md:px-10 ${className}`}>{children}</section>
 );
 
-// <Stat label="..." value={<span>...</span>} sub="..." />
-const Stat = ({ label, value, sub, className = "" }: StatProps) => (
-  <div className={className}>
-    {label && <div className="text-sm opacity-70">{label}</div>}
-    <div className="text-2xl font-semibold">{value}</div>
-    {sub && <div className="text-xs opacity-60">{sub}</div>}
+const Bullet = ({ children }) => (
+  <div className="flex items-start gap-3"><Check className="mt-1 h-5 w-5" /><p>{children}</p></div>
+);
+
+const Stat = ({ label, value, sub }) => (
+  <div className="rounded-2xl border p-6 text-center shadow-sm">
+    <div className="text-3xl font-semibold tracking-tight">{value}</div>
+    <div className="mt-1 text-sm text-muted-foreground">{label}</div>
+    {sub && <div className="mt-2 text-xs text-muted-foreground/70">{sub}</div>}
   </div>
 );
+
 // --- Main Page ---
 export default function LandingWine() {
   const [open, setOpen] = useState(false);
@@ -133,7 +110,7 @@ export default function LandingWine() {
               <Card className="w-full max-w-md rounded-2xl border-rose-100/80 bg-white/90 backdrop-blur">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2"><Package className="h-5 w-5"/> What you get monthly</CardTitle>
-                  <CardDescription>High‑end gear + hands on coaching.</CardDescription>
+                  <CardDescription>High‑end gear + hands‑on coaching.</CardDescription>
                 </CardHeader>
                 <CardContent className="grid gap-3 text-sm">
                   <div className="flex items-start gap-3"><Thermometer className="mt-0.5 h-4 w-4"/><p>Temperature‑controlled stainless fermenter (30L) with digital probe</p></div>

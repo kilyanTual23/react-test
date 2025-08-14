@@ -11,4 +11,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-})
+  esbuild: {
+    logOverride: { 'ts': 'silent' } // This mutes some TS messages
+  }
+})// vite.config.ts
